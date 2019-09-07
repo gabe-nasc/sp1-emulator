@@ -12,7 +12,7 @@ instruction prog[256];
 
 int main(int argc, char const *argv[])
 {
-    FILE *file = fopen("test.bin", "rb");
+    FILE *file = fopen(argv[1], "rb");
     int num_inst = 0, pc = 0, acc;
     byte memo[256], stats = 0;
     short buff;
@@ -25,8 +25,10 @@ int main(int argc, char const *argv[])
         num_inst++;
     }
 
-    while (pc <= num_inst)
+    while (prog[pc].opcode != 15)
     {
+        stats = 0;
+
         switch (prog[pc].opcode)
         {
         // LOAD$
@@ -157,11 +159,6 @@ int main(int argc, char const *argv[])
                 pc++;
             }
             break;
-
-        // HLT
-        case 15:
-            printf("acc: %d\nstat: %d\n", acc, stats);
-            return 0;
         }
 
         acc = (byte)acc;
@@ -171,4 +168,7 @@ int main(int argc, char const *argv[])
             stats = stats | 1;
         }
     }
+    printf("acc: %d stat: %d\n", acc, stats);
+    
+    return 0;
 }
