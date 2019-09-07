@@ -133,14 +133,14 @@ int main(int argc, char const *argv[])
 
         // JMP
         case 12:
-            pc = prog[pc].operand;
+            pc = prog[pc].operand/2;
             break;
 
         // JZ
         case 13:
             if (acc == 0)
             {
-                pc = prog[pc].operand;
+                pc = prog[pc].operand/2;
             }
             else
             {
@@ -152,7 +152,7 @@ int main(int argc, char const *argv[])
         case 14:
             if (acc != 0)
             {
-                pc = prog[pc].operand;
+                pc = prog[pc].operand/2;
             }
             else
             {
